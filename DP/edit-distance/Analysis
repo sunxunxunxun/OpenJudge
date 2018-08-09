@@ -21,3 +21,5 @@
 总结为，对于i>0,j>0的状态(i,j),m[i][j] = min( m[i-1][j-1]+(s[i]==s[j])?0:1 , m[i-1][j]+1, m[i][j-1] +1)。
 
 这里的重叠子结构是S[1...i]，T[1...j]。
+
+https://blog.csdn.net/ac540101928/article/details/52786435
