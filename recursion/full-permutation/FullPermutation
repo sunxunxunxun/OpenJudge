@@ -1,0 +1,31 @@
+/* 对于排列中的每一个元素 都可以从原排列中的字母中枚举 已经取过的后面的则不能再取 
+*/
+#include "iostream"
+#include "cmath"
+#include "vector"
+#include "string"
+using namespace std;
+bool visited[6] = { 0 };
+string s;
+char b[6];
+int len;
+void all_permutation(int step) {
+	if (step == len) { /* 已经去了len个数了- - 输出并且返回 */
+		cout << b << endl;
+		return;
+	}
+	for (int i = 0; i < len; i++) { /* 枚举s[step]所有可能的取值 */
+		if (!visited[i]) {  /* 前面step-1次已经取出的就不能再取了 */
+			visited[i] = 1;
+			b[step] = s[i];
+			all_permutation(step + 1);
+			visited[i] = 0; /* 回到step这一步 i恢复为没有访问的状态 */
+		}
+	}
+}
+int main() {
+	cin >> s;
+	len = s.length();
+	all_permutation(0);
+	return 0;
+}
