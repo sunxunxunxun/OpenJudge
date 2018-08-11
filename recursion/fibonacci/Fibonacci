@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+/*Fibonacci sequence
+ 1, 1, 2, 3, 5, 8, 13, 21, ...
+*/
+
+int fibonacci(int first, int second, int n){ /* 以first和second开始的第n个数*/
+    if(n==1) return first;
+    else if(n==2) return second;
+    else return fibonacci(second, first+second, n-1);
+}
+
+int main()
+{
+    int a, b, index;
+    cin >> a >> b >> index;
+    cout << fibonacci(a, b, index);
+    return 0;
+}
