@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+const int INF = 0xfffffff;
+char s1[105], s2[105];
+int m[105][105];
+
+ void dp(int x, int y){
+    for(int i=0; i<=x; i++){
+        for(int j=0; j<=y; j++){
+            if(i==0) m[0][j] = j;
+            if(j==0) m[i][0] = i;
+            if(i&&j) m[i][j] = INF;
+        }
+    }
+    for(int i=1; i<=x; i++){
+        for(int j=1; j<=y;j++){
+            m[i][j] =  min(m[i-1][j-1], min(m[i][j-1], m[i-1][j])) + (s1[i]==s2[j] ? 0:1);  //最后表达式加括号
+        }
+    }
+}
+
+int main()
+{
+    string line;
+    int l1, l2;
+    //读入
+    while(scanf("%s%s", s1+1, s2+1)){//从下标1开始存储
+        l1 = strlen(s1+1)+1; //strlen(s1) == 0 true  因为strlen读到'\0'结，而s1[0]即为'\0'
+        l2 = strlen(s2+1)+1;
+        dp(l1,l2);
+        cout << m[l1][l2];
+    }
+    return 0;
+}
