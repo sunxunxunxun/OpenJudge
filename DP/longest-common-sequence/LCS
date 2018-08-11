@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <string>
+#include <vector>
+
+using namespace std;
+const int maxn = 105;
+char s1[maxn], s2[maxn];
+int c[maxn][maxn]; vector<char> b[maxn][maxn]; //分别记录当前最大最序列和上一个状态
+
+//字符序列
+void LCS(int x, int y){
+    for(int i=0; i<=x; i++) c[i][0] = 0;  //找到基础条件，从基础条件开始循环计算
+    for(int i=0; i<=y; i++) c[0][y] = 0;
+    for(int i=1; i<=x; i++)
+        for(int j=1;j<=y; j++){
+            if(s1[i]==s2[j]) {
+                c[i][j] = c[i-1][j-1]+1;
+            }
+            else c[i][j] = max(c[i-1][j], c[i][j-1]);
+        }
+}
+
+int main()
+{
+    scanf("%s%s", s1+1, s2+1);
+    int len1 = strlen(s1+1), len2 = strlen(s2+1);
+    LCS(len1, len2);
+    cout << c[len1][len2];
+    return 0;
+}
