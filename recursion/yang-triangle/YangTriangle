@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+/* 某位置数字大小等于两肩上数字之和*/
+
+int getValue(int x, int y){  //从0开始
+    if(y<=x){
+        if(!y || y==x) return 1;
+        else return getValue(x-1, y-1) + getValue(x-1, y);
+    }
+    return -1;
+}
+int main()
+{
+    //求位置(x, y)上数字
+    int x, y;
+    cin >> x >> y;
+    cout << getValue(x, y);
+    return 0;
+}
