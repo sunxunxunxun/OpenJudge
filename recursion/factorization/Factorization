@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+int sum;
+
+void factorization(int a, int n){
+    if(a==n) return;  //因数是自身情况
+    for(int i=a; i<n; i++){
+        if(!(n%i) && i<=n/i) { //i<=a/i确保因数递增
+            sum++; //注意自增操作位置
+            factorization(i, n/i);
+        }
+    }
+}
+int main()
+{
+    int T;
+    cin >> T;
+    while(T--){
+        int n; cin >> n;
+        sum = 1;
+        factorization(2, n);
+        cout << sum << "\n";
+    }
+    return 0;
+}
