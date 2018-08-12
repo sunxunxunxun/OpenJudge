@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+const int maxn = 105;
+int A[maxn];
+
+//时间复杂度为O(n^2)的方式
+int main()
+{
+    int n; cin >> n;
+    for(int i=0; i<n; i++) cin >>A[i];
+    int before[n]={-1}; //保存最长上升子序列
+    int c[n]={1};//以A[i]结束的最大上升子序列长度, 初始只有自身一个元素
+    int maxl=1;//最大上升子序列长度
+    //求解c[n]数组
+    for(int i=1; i<n; i++){
+        for(int j=0; j<i; j++){   //c[i] = max(c[j])+1, j<i&&A[j]<A[i]
+            if(A[j]<A[i] && c[j]+1>c[i]){
+                c[i] = c[j]+1;
+                maxl = maxl>c[i] ? maxl:c[i];
+                before[i] = j;
+            }
+        }
+    }
+    //找出最大的c[i]
+    //sort(c,c+n);
+    cout << maxl;
+    return 0;
+}
