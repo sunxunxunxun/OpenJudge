@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+const int maxn = 1010;
+int A[maxn];
+
+//二分法查找下界
+int bi_search(int* B, int left, int right, int x){  //right也为一个有意义的元素的下标
+    int mid;
+    while(left<right){
+        mid = (left+right)/2;
+        if(B[mid]>=x) right=mid;  //数列中可能有多个等于x的数
+        else left=mid+1;
+    }
+    return left;
+}
+int main()
+{
+    int n; cin >> n;
+    for(int i=0; i<n; i++) cin >> A[i];
+    int maxl=1; //最大上升子序列长度
+    int B[maxn]={0}; //最大上升子序列
+    int j=0;
+    B[j++] = A[0];
+    for(int i=1; i<n; i++){
+        if(A[i]>B[maxl-1]) j=maxl++; // j为新进元素该插入的位置，maxl为B数组上升序列的长度
+        else{
+            //二分法查找A[i]的替换位置，即第一个大于A[i]的数字前
+            j = bi_search(B, 0, maxl-1, A[i]);
+
+        }
+        B[j] = A[i];
+    }
+    cout << maxl << "\n";
+    cout << B[0];
+    for(int i=1; i<maxl; i++) cout << " " << B[i];
+    return 0;
+}
