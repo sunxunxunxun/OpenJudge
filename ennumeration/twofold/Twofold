@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+int a[20];
+
+int main()
+{
+    int l;
+    for(l=0;;l++){
+        int x; cin >> x;
+        if(!x) break;
+        a[l] = x;
+    }
+    int cnt=0;
+    for(int i=0; i<l; i++){
+        for(int j=i+1; j<l; j++){
+            if(a[i]==a[j]*2 || a[j]==a[i]*2) cnt++;
+        }
+    }
+    cout << cnt;
+    return 0;
+}
