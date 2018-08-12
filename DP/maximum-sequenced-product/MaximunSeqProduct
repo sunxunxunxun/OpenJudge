@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+const int maxn =1010;
+float A[maxn];
+
+int main()
+{
+    int n; cin >> n;
+    for(int i=0; i<n; i++) cin >> A[i];
+    float maxm[n],minm[n];
+    maxm[0] = A[0]; minm[0] = A[0];
+    for(int i=1; i<n; i++){
+        maxm[i] = max(max(maxm[i-1]*A[i], minm[i-1]*A[i]), A[i]);
+        minm[i] = min(min(maxm[i-1]*A[i], minm[i-1]*A[i]), A[i]);   //负负得正情况
+    }
+    sort(maxm, maxm+n);
+    cout <<maxm[n-1];
+    return 0;
+}
