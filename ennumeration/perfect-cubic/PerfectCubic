@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+const int maxn = 105;
+struct cubic{
+    int a, b, c, d;
+    cubic(int a=0, int b=0, int c=0, int d=0):a(a),b(b),c(c),d(d){}
+};
+
+int main()
+{
+    int n; cin >> n;
+    vector<cubic> c;
+    for(int i=2; i<=100; i++){
+        for(int j=2; j<i; j++){
+            for(int k=j; k<i; k++){
+                for(int m=k; m<i; m++){
+                    if(i*i*i == j*j*j+k*k*k+m*m*m) c.push_back(cubic(i, j, k, m));
+                }
+            }
+        }
+    }
+    for(int i=0; c[i].a<=n; i++)
+        printf("Cube = %d, Triple = (%d, %d, %d)\n", c[i].a, c[i].b, c[i].c, c[i].d);
+    return 0;
+}
