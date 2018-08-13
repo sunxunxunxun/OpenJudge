@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <string>
+#include <cstring>
+
+using namespace std;
+vector<string> file;
+
+void read(string s, int &p){
+    if(!p && s[0]=='f') file.push_back(s);
+    else if(p && s[0]=='f') {for(int i=0; i<p; i++) cout << "|     "; cout << s <<"\n";}
+    else if(s[0]=='d') {
+        p++;
+        for(int i=0; i<p; i++) cout << "|     ";
+        cout << s <<"\n";
+    }
+    else if(p && s[0]==']') p--;
+    else {
+        for(int i=0; i<file.size(); i++) cout <<file[i] <<"\n";
+    }
+}
+int main()
+{
+    int kase=0;
+    int start=1, p=0;
+    for(;;){
+        string s;
+        cin >> s;
+        if(s[0]=='#') {
+            if(!file.empty()) for(int i=0; i<file.size(); i++) cout <<file[i] <<"\n";
+            break;
+        }
+        else if(s[0]=='*') {start = 1; read(s,p); continue;}
+        if(start) {printf("DATA SET %d:\nROOT\n", ++kase); start=0;}
+        read(s, p);
+    }
+    return 0;
+}
